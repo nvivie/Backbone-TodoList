@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+  <title>Basic Backbone Todo List</title>
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.4.2/pure-min.css">
+  <style type="text/css">
+    #app-title {
+      text-align: center;
+      border-bottom: 3px solid #000;
+      padding: 15px 0;
+      margin-top: 0;
+      background: #cde0cf;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+    }
+
+    #todo-list {
+      width: 500px;
+      padding: 0;
+    }
+
+    .todo {
+      list-style-position: inside;
+      position: relative;
+      padding: 7px 10px;
+      margin-bottom: 10px;
+    }
+
+    .todo:nth-child(even) {
+      background: #f1f1f1;
+    }
+
+    .todo-wrapper {
+      transition: all 0.3s ease;
+    }
+
+    .todo p {
+      margin-bottom: 0;
+    }
+
+    .due {
+      color: #5b79f1;
+      padding-left: 5px;
+    }
+
+    .important {
+      border-left: 6px solid #f13606;
+    }
+
+    .completed .todo-wrapper {
+      opacity: 0.4;
+    }
+
+    .completed .complete {
+      display: none;
+    }
+
+    .completed .incomplete {
+      display: block;
+    }
+
+    .todo-actions {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+
+    .todo-action {
+      display: block;
+      float: left;
+      margin-left: 6px;
+      font-size: 14px;
+      width: 14px;
+      height: 14px;
+      text-decoration: none;
+      padding: 4px;
+      overflow: hidden;
+      line-height: 12px;
+      text-align: center;
+      border-radius: 50%;
+    }
+
+    .delete {
+      background: #ac070b;
+      color: #fff;
+    }
+
+    .complete {
+      background: #38c95b;
+      color: #fff;
+    }
+
+    .incomplete {
+      display: none;
+      color: #fff;
+      background: #4263f1;
+    }
+
+    #toggle-stats {
+      font-size: 12px;
+    }
+
+    #stats {
+      width: 480px;
+      padding: 10px;
+      margin: 3px 0 20px;
+      background: #ecf1a1;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    #stats li {
+      float: left;
+      list-style-type: none;
+      width: 33%;
+      text-transform: uppercase;
+    }
+
+    .clearfix:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="app-title">Todos</h1>
+
+<main class="pure-g" id="todo-app">
+  <div class="pure-u-1-2">
+    <form action="" id="todo-form" class="pure-form pure-form-aligned">
+      <div class="pure-control-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title">
+      </div>
+      <div class="pure-control-group">
+        <label for="due">Due</label>
+        <input type="date" id="due" name="due">
+      </div>
+      <div class="pure-control-group">
+        <label for="notes">Notes</label>
+        <textarea name="notes" id="notes" cols="30" rows="4"></textarea>
+      </div>
+      <div class="pure-control-group">
+        <label for="important">Important</label>
+        <input type="checkbox" name="important" id="important">
+      </div>
+      <div class="pure-controls">
+        <button type="submit" id="create-todo" class="pure-button pure-button-primary">Add Task</button>
+      </div>
+    </form>
+  </div>
+  <div class="pure-u-1-2">
+    <a href="#stats" id="toggle-stats" class="pure-button">Show/Hide Stats</a>
+    <ul id="stats" class="clearfix">
+      <li>Important: <span id="count-important">0</span></li>
+      <li>Complete: <span id="count-complete">0</span></li>
+      <li>Total: <span id="count-total">0</span></li>
+    </ul>
+    <ol id="todo-list"></ol>
+  </div>
+</main>
+
+<script type="text/template" id="todo-template">
+  <div class="todo-wrapper">
+    <strong><%= title %></strong>
+    <small class="due"><%= due %></small>
+
+    <p>
+      <%= notes %>
+    </p>
+  </div>
+  <div class="todo-actions clearfix">
+    <a href="#" class="todo-action complete"><i class="fa fa-check"></i></a>
+    <a href="#" class="todo-action incomplete"><i class="fa fa-repeat"></i></a>
+    <a href="#" class="todo-action delete"><i class="fa fa-trash-o"></i></a>
+  </div>
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+<script src="backbone.localStorage-min.js"></script>
+<script src="todo-model.js"></script>
+<script src="todo-view.js"></script>
+<script src="todo-collection.js"></script>
+<script src="app-view.js"></script>
+
+</body>
+</html>
